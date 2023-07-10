@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model categories {
+  id          Int        @id(map: "category_pkey") @default(autoincrement())
+  description String
+  status      Boolean
+  expenses    expenses[]
+}
+
+model expenses {
+  id          Int        @id @default(autoincrement())
+  description String
+  category    Int
+  amount      Int
+  date        DateTime   @db.Date
+  method      Int
+  status      Boolean
+  categories  categories @relation(fields: [category], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  methods     methods    @relation(fields: [method], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model methods {
+  id          Int        @id @default(autoincrement())
+  description String
+  status      Boolean
+  expenses    expenses[]
+}
+
+model users {
+  id       Int     @id @default(autoincrement())
+  user     String
+  password String
+  status   Boolean
+}
+
+model change {
+  id           Int      @id @default(autoincrement())
+  amount_usdt  Int
+  amount_ars   Int
+  date         DateTime @db.Date
+  change_price Int
+}
