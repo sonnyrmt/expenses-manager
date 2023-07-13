@@ -6,6 +6,7 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const router = useRouter();
+  const isLoginPath = router.pathname === "/login" ? true : false;
 
   const [authenticated, setAuthenticated] = useState(false);
   const [userData, setUserData] = useState(null);
@@ -40,5 +41,11 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  return <AuthContext.Provider value={{ authenticated, login, logout, userData }}>{children}</AuthContext.Provider>;
+  if (authenticated) {
+    return (
+      <AuthContext.Provider value={{ authenticated, logout, userData, setUserData }}>{children}</AuthContext.Provider>
+    );
+  } else if (isLoginPath) {
+    return <AuthContext.Provider value={{ authenticated, logout, userData }}>{children}</AuthContext.Provider>;
+  }
 };

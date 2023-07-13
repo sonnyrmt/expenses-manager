@@ -20,7 +20,7 @@ const Login = () => {
       const { data } = await axios.post("/api/login", values);
       setError(null);
       localStorage.setItem("token", data.token);
-      router.push("/");
+      window.location.replace("/");
     } catch (error) {
       setError(error?.response?.data?.error || "Ocurrio un error inesperado");
     }

@@ -5,8 +5,18 @@ import Skeleton from "@mui/material/Skeleton";
 import thousandSeparator from "@/utils/thousandSeparator";
 import { motion, AnimatePresence } from "framer-motion";
 import ChartTest from "../ChartTest";
+import { useContext, useState } from "react";
+import { AuthContext } from "@/context/AuthContext";
+import EnterNewPayment from "../EnterNewPayment/EnterNewPayment";
 
 const Header = ({ setOpen, headerData, loading }) => {
+  const [openEnterPayment, setOpenEnterPayment] = useState(false);
+
+  const {
+    userData: { wallet_balance, id },
+    setUserData,
+  } = useContext(AuthContext);
+
   return (
     <AnimatePresence>
       <motion.div
@@ -36,14 +46,14 @@ const Header = ({ setOpen, headerData, loading }) => {
                 <Divider orientation="vertical" flexItem />
                 <div>
                   <div className="uppercase font-semibold text-[#a5f990] text-xl">
-                    600 <span className="text-sm font-light text-gray-400">USDT</span>
-                    <IconButton sx={{ ml: 1 }} size="small">
+                    {wallet_balance} <span className="text-sm font-light text-gray-400">USDT</span>
+                    <IconButton onClick={() => setOpenEnterPayment(true)} sx={{ ml: 1 }} size="small">
                       <AddCircleOutlineIcon sx={{ fontSize: 18 }} />
                     </IconButton>
                   </div>
                   <Divider />
                   <div className="uppercase font-semibold text-[#90caf9] text-xl">
-                    {thousandSeparator(600 * headerData.data.exchangeData)}{" "}
+                    {thousandSeparator(wallet_balance * headerData.data.exchangeData)}{" "}
                     <span className="text-sm font-light text-gray-400">Binance Price</span>
                   </div>
                 </div>
@@ -95,6 +105,7 @@ const Header = ({ setOpen, headerData, loading }) => {
           </div>
         )}
       </motion.div>
+      <EnterNewPayment open={openEnterPayment} setOpen={setOpenEnterPayment} setUserData={setUserData} userId={id} />
     </AnimatePresence>
   );
 };
