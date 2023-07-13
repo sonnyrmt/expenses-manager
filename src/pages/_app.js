@@ -1,5 +1,8 @@
 import "@/styles/globals.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+// import PrivateRoute from "@/components/PrivateRoute";
+import { AuthProvider } from "@/context/AuthContext";
+import { PrivateRoute } from "@/components";
 
 const theme = createTheme({
   typography: {
@@ -7,16 +10,15 @@ const theme = createTheme({
   },
   palette: {
     mode: "dark",
-    // primary: {
-    //   main: "#a9a9a9",
-    // },
   },
 });
 
 export default function App({ Component, pageProps }) {
   return (
     <ThemeProvider theme={theme}>
-      <Component {...pageProps} />;
+      <AuthProvider>
+        <Component {...pageProps} />;
+      </AuthProvider>
     </ThemeProvider>
   );
 }

@@ -1,8 +1,12 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "@/services/database";
 import axios from "axios";
-const prisma = new PrismaClient();
+import dayjs from "dayjs";
 
 export default async function handler(req, res) {
+  const today = dayjs();
+  const startOfMonth = today.startOf("month");
+  const endOfMonth = today.endOf("month");
+
   try {
     if (req.method === "GET") {
       const usdtToArs = await axios.get("https://criptoya.com/api/usdt/ars/0.1");
@@ -10,6 +14,10 @@ export default async function handler(req, res) {
       const expenses = await prisma.expenses.findMany({
         where: {
           status: true,
+          date: {
+            gte: startOfMonth.toDate(),
+            lte: endOfMonth.toDate(),
+          },
         },
       });
 

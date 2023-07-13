@@ -5,3 +5,43 @@
 body {
   overflow: hidden;
 }
+
+.css-6hp17o-MuiList-root-MuiMenu-list {
+  padding: 0;
+}
+
+.red {
+  color: #ff6161;
+  border: 1px solid #ff6161;
+  padding: 0px 5px;
+  border-radius: 5px;
+  min-width: 115px;
+  text-align: center;
+}
+
+.green {
+  color: #6ff86f;
+  border: 1px solid #6ff86f;
+  padding: 0px 5px;
+  border-radius: 5px;
+  min-width: 115px;
+  text-align: center;
+}
+
+.blue {
+  color: lightblue;
+  border: 1px solid lightblue;
+  padding: 0px 5px;
+  border-radius: 5px;
+  min-width: 115px;
+  text-align: center;
+}
+
+.fadeTransition {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.fadeTransition.show {
+  opacity: 1;
+}

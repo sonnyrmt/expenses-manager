@@ -30,14 +30,16 @@ model methods {
   id          Int        @id @default(autoincrement())
   description String
   status      Boolean
+  color       String?
   expenses    expenses[]
 }
 
 model users {
-  id       Int     @id @default(autoincrement())
-  user     String
-  password String
-  status   Boolean
+  id             Int     @id @default(autoincrement())
+  user           String  @unique
+  password       String
+  status         Boolean
+  wallet_balance Int?
 }
 
 model change {
