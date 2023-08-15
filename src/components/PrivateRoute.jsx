@@ -9,7 +9,7 @@ const PrivateRoute = ({ children }) => {
 
   const isAuthenticated = async () => {
     try {
-      const { data } = await axios.get("/api/auth", { headers: { Authorization: `Bearer ${token}` } });
+      await axios.get("/api/auth", { headers: { Authorization: `Bearer ${token}` } });
       setAuthenticated(true);
     } catch (error) {
       if (router.pathname !== "/login") {

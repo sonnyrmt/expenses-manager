@@ -7,10 +7,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import ChartTest from "../ChartTest";
 import { useContext, useState } from "react";
 import { AuthContext } from "@/context/AuthContext";
-import EnterNewPayment from "../EnterNewPayment/EnterNewPayment";
+import EnterNewPayment from "../EnterNewPayment";
+import EnterNewExchange from "../EnterNewExchange";
 
 const Header = ({ setOpen, headerData, loading }) => {
   const [openEnterPayment, setOpenEnterPayment] = useState(false);
+  const [openEnterExchange, setOpenEnterExchange] = useState(false);
 
   const {
     userData: { wallet_balance, id },
@@ -67,6 +69,9 @@ const Header = ({ setOpen, headerData, loading }) => {
                 <div>
                   <div className="uppercase font-semibold text-[#a5f990] text-xl">
                     {headerData.data.total.usdt} <span className="text-sm font-light text-gray-400">USDT</span>
+                    <IconButton onClick={() => setOpenEnterExchange(true)} sx={{ ml: 1 }} size="small">
+                      <AddCircleOutlineIcon sx={{ fontSize: 18 }} />
+                    </IconButton>
                   </div>
                   <Divider />
                   <div className="uppercase font-semibold text-[#90caf9] text-xl">
@@ -105,7 +110,8 @@ const Header = ({ setOpen, headerData, loading }) => {
           </div>
         )}
       </motion.div>
-      <EnterNewPayment open={openEnterPayment} setOpen={setOpenEnterPayment} setUserData={setUserData} userId={id} />
+      <EnterNewPayment open={openEnterPayment} setOpen={setOpenEnterPayment} />
+      <EnterNewExchange open={openEnterExchange} setOpen={setOpenEnterExchange} />
     </AnimatePresence>
   );
 };

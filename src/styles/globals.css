@@ -11,7 +11,7 @@ body {
 }
 
 .red {
-  color: #ff6161;
+  color: #ffffff;
   border: 1px solid #ff6161;
   padding: 0px 5px;
   border-radius: 5px;
@@ -20,7 +20,7 @@ body {
 }
 
 .green {
-  color: #6ff86f;
+  color: #ffffff;
   border: 1px solid #6ff86f;
   padding: 0px 5px;
   border-radius: 5px;
@@ -29,8 +29,8 @@ body {
 }
 
 .blue {
-  color: lightblue;
-  border: 1px solid lightblue;
+  color: ffffff;
+  border: 1px solid rgb(132, 208, 233);
   padding: 0px 5px;
   border-radius: 5px;
   min-width: 115px;
